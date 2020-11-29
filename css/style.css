@@ -1,0 +1,150 @@
+/* To Do:
+    -Update Mentor Login to change to logout or something while someone is logged in  
+    -Consistency  
+*/
+
+/* Updated .row to a .colored, so that it will not be colored unless you use the colored class variant
+   To use just add "colored" in the class like: <div class="row colored justify-content-center">
+*/
+
+/* Included a couple extra options like jumbotrons or carousels */
+body {
+    margin-top: 100px;
+    background: #fcf1f1;
+    font-family: 'Raleway';
+    color: #1a1c20;
+}
+
+#mainNavbar .navbar-brand {        
+    font-size: 2rem;
+    color: #1a1c20;    
+}
+
+#mainNavbar .navbar-brand:hover {        
+    font-size: 2rem;
+    color: #b8a89d;    
+}
+
+#mainNavbar {
+    background: #f9813a;
+    font-size: 1.25rem;
+    font-weight: 80;
+}
+
+#mainNavbar .nav-link {
+    color : #fcf1f1;    
+}
+
+#mainNavbar .nav-link:hover {
+    color : #ffd5cd;    
+}
+
+#mainNavbar .navbar-toggler {
+    background-color : #1a1c20a9;       
+}
+
+#homeJumbo {    
+    color: #1a1c20;
+    background-color: #ffd1b7;
+    font-weight: 1200;
+    background-image: url('');
+    background-size: cover;
+    height: 100vh;
+  }
+
+/* #contactJumbo {
+    color: #ffd5cdbb;
+    font-weight: 1200;
+    background-image: url('');
+    background-size: cover;
+    height: 66vh;
+} */
+
+.btn {
+    background-color: #f9813a;
+    border-color: #f9813a;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.btn:hover {
+    background-color: #ffa876;
+    border-color: #ffa876;
+}
+
+.carousel-item {    
+    width: 100%;   
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    transition-duration: 2s;
+}
+
+/* Background color of navbar after user scrolls */
+#mainNavbar.navbar.userScrolled {
+    background: #f9813ac0;     
+}
+
+.card-body {
+    background-color: #fcf1f1;
+}
+
+#credit {
+    font-size: .9rem;
+}
+
+#headingGroup h1{
+    color: #1a1c20;    
+}
+
+.colored{    
+    background-color: #ffd1b7;
+       
+}
+
+.tableRows{
+
+    background-color: transparent;
+}
+
+
+#scrollBox {
+    overflow: auto;
+    max-height: 400px;   
+}
+
+
+/* .resultContainer {
+  display: table;
+  width: 100%;
+} */
+
+/* .leftHalf {
+  background-color: #ff9e66;
+  position: absolute;
+  font-weight: 30;
+  left: 0px;
+  width: 10%;
+}
+
+.rightHalf {
+  position: absolute;
+  right: 0px;
+  width: 90%;
+} */
+
+.tab4 { 
+    tab-size: 8; 
+}
+
+/* .content{
+    margin-top: 100px;
+} */
+
+.col-centered{
+    margin: 0 auto;
+    float: none;
+}
+
+  

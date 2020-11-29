@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font from Google -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200i,300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/MentorProfile.CSS"> -->
+
+    <title>Expert Finder</title>
+
+
+</head>
+
+<body>
+    <nav id="mainNavbar" class="navbar navbar-expand-md fixed-top navbar-dark">
+        <a href="index.html" class="navbar-brand">Expert Finder</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">SEARCH</a>
+                </li>
+                <li class="nav-item">
+                    <a href="add-new-expert.html" class="nav-link">RECOMMEND</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="mentor-profile.html" class="nav-link">PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">LOGIN</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6 colored">
+                    <h2>Mentor Name</h2>
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered"
+                        id="firstName">
+                    <br>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered"
+                        id="lastName">
+                    <br>
+                </div>
+                <!-- <div class = "form-group col-md-3"> 
+            </div> -->
+                <div class="form-group col-md-6 colored">
+                    <h2>Update Profile</h2>
+                    <button class="btn btn-primary" type="submit" id="submitID">Save Changes</button>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitches">
+                        <label class="custom-control-label" for="customSwitches">Make Profile Discoverable</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md colored">
+                    <h2>Contact Info</h2>
+                    <label for="emailId">Email</label>
+                    <div class="input-group-md ">
+                        <input type="text" class="form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered"
+                            id="emailId" placeholder="JaneDoe">
+                        <div class="input-group-append">
+                            <div
+                                class="input-group-text form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered">
+                                @OregonState.edu</div>
+                        </div>
+                    </div>
+                    <br>
+                    <label for="phoneId">Phone</label>
+                    <input type="tel" class="form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered"
+                        id="phoneId" name="phone" placeholder="xxx-xxx-xxxx" maxlength="14">
+                    <br>
+                </div>
+                <div class="form-group col-md colored">
+                    <h2>External Links</h2>
+                    <label for="LinkedinId">Linkedin Profile</label>
+                    <input type="url" class="form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered"
+                        id="LinkedinID" name="LinkedinAddress">
+                    <br>
+                    <label for="GitId">GitHub Link</label>
+                    <input type="url" class="form-control col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 col-centered"
+                        id="GitID" name="GitAddress">
+                    <br>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <br>
+    <div>
+
+    </div>
+    <Div class="container-fluid colored">
+        <Div class="row tableRows">
+            <!-- Table for  Classes-->
+            <div class="col">
+                <div class="table-responsive">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row tableRows">
+                                <div class="col-sm-8">
+                                    <h2>Classes</h2>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-secondary add-new" id="add-class"><i
+                                            class="fa fa-plus"></i> Add New</button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered" id="tab_class">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Title</th>
+                                    <th>Show</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </Div>
+            <!--End of Classes Table-->
+            <!-- Table for skills-->
+            <div class="col">
+
+                <div class="table-responsive">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row tableRows">
+                                <div class="col-sm-8">
+                                    <h2>Skills</h2>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-secondary add-new" id="add-Skills"><i
+                                            class="fa fa-plus"></i> Add New</button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered" id="tab_Skills">
+                            <thead>
+                                <tr>
+                                    <th>Skills</th>
+                                    <th>Show</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--End of skills table-->
+                <!--Org Table-->
+                <div class="col">
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row tableRows">
+                                    <div class="col-sm-8">
+                                        <h2>Orgs</h2>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-secondary add-new" id="add-org"><i
+                                                class="fa fa-plus"></i> Add New</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered" id="tab_org">
+                                <thead>
+                                    <tr>
+                                        <th>Org</th>
+                                        <th>Role</th>
+                                        <th>Show</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <!--End of Org Table-->
+                </Div>
+            </Div>
+        </Div>
+    </Div>
+
+    <br>
+
+    <!-- Optional Bottom Bar, Used Github as Example-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <p>Hosted on</p>
+                <a href="https://github.com/">
+                    <img src="imgs/GitHub-Mark-120px-plus.png" class="img-fluid" alt="Github Logo" width="120"
+                        height="120">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+
+<script src="js/MentorProfile.js"></script>

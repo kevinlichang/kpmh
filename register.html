@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font from Google -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200i,300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Expert Finder</title>
+
+    <!-- <style>
+        /* Full-width input fields */
+        input[type=text],
+        input[type=password] {
+            width: 65%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            text-align: left;
+        }
+
+        .registerbtn {
+            background-color: rgb(26, 28, 32);
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        label {
+            display: inline-block;
+            width: 140px;
+            text-align: right;
+        }
+
+        ​
+    </style> -->
+
+
+</head>
+
+<body>
+    <nav id="mainNavbar" class="navbar navbar-expand-md fixed-top navbar-dark">
+        <a href="index.html" class="navbar-brand">Expert Finder</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">SEARCH</a>
+                </li>
+                <li class="nav-item">
+                    <a href="add-new-expert.html" class="nav-link">RECOMMEND</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="mentor-profile.html" class="nav-link">PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">LOGIN</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <p></p>
+    <div class="container-fluid">
+        <div class="text-center">
+            <form action="index.html">
+                <div class="container-fluid registerContainer form-group colored col-10 col-md-6 col-lg-6 col-xl-4">
+                    <h1>Sign up</h1>
+                    <p>Fill in this form for yourself or someone else.</p>
+
+                    <div class="form-group">
+                        <label for="email"><b>Email </b></label>
+                        <input type="text" class="form-control" placeholder="Enter Email" name="email" id="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><b>Password </b></label>
+                        <input type="password" class="form-control" placeholder="Enter Password" name="psw" id="psw"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname"><b>First Name </b></label>
+                        <input type="text" class="form-control" placeholder="Enter First Name" name="firstname"
+                            id="firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname"><b>Last Name </b></label>
+                        <input type="text" class="form-control" placeholder="Enter Last Name" name="lastname"
+                            id="lastname" required>
+                    </div>
+
+                    <Div class="container-fluid">
+                        <Div class="row tableRows">
+                            <!-- Table for  Classes-->
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <div class="table-wrapper">
+                                        <div class="table-title">
+                                            <div class="row tableRows">
+                                                <div class="col-sm-8">
+                                                    <h2>Classes</h2>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <button type="button" class="btn btn-secondary add-new"
+                                                        id="add-class"><i class="fa fa-plus"></i> Add New</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table table-bordered" id="tab_class">
+                                            <thead>
+                                                <tr>
+                                                    <th>Class</th>
+                                                    <th>Title</th>
+                                                    <th>Show</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--End of Classes Table-->
+                                <br>
+                                <!-- Table for skills-->
+                                <div class="col">
+
+                                    <div class="table-responsive">
+                                        <div class="table-wrapper">
+                                            <div class="table-title">
+                                                <div class="row tableRows">
+                                                    <div class="col-sm-8">
+                                                        <h2>Skills</h2>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <button type="button" class="btn btn-secondary add-new"
+                                                            id="add-Skills"><i class="fa fa-plus"></i> Add New</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table class="table table-bordered" id="tab_Skills">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Skills</th>
+                                                        <th>Show</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--End of skills table-->
+                                    <br>
+                                    <!--Org Table-->
+                                    <div class="col">
+                                        <div class="table-responsive">
+                                            <div class="table-wrapper">
+                                                <div class="table-title">
+                                                    <div class="row tableRows">
+                                                        <div class="col-sm-8">
+                                                            <h2>Orgs</h2>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button type="button" class="btn btn-secondary add-new"
+                                                                id="add-org"><i class="fa fa-plus"></i> Add New</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-bordered" id="tab_org">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Org</th>
+                                                            <th>Role</th>
+                                                            <th>Show</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                        <!--End of Org Table-->
+                                    </Div>
+                                </Div>
+
+                                <br>
+                                <div class="form-group">
+                                    <label for="git"><b>GitHub </b></label>
+                                    <input type="text" class="form-control" placeholder="Enter GitHub Link (Optional)"
+                                        name="git" id="git">
+                                </div>
+                                <div class="form-group">
+                                    <label for="linkedin"><b>LinkedIn </b></label>
+                                    <input type="text" class="form-control" placeholder="Enter LinkedIn (Optional)"
+                                        name="linkedin" id="course">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter"><b>Twitter </b></label>
+                                    <input type="text" class="form-control" placeholder="Enter Twitter (Optional)"
+                                        name="twitter" id="twitter">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg"
+                                    id="register-submit">Register</button>
+                            </div>
+
+                            <div class="container signin">
+                                <p>Already have an account? <a href="login.html">Sign in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+
+
+    <!-- Optional Bottom Bar, Used Github as Example-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <p>Hosted on</p>
+                <a href="https://github.com/">
+                    <img src="imgs/GitHub-Mark-120px-plus.png" class="img-fluid" alt="Github Logo" width="120"
+                        height="120">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="js/register.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

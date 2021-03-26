@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-image: url("../images/photography.png");
+}
+
+.gray-grad-bg {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+.gray-hr {
+  background: gray;
+}
+
+.blue-grad-bg {
+  background: linear-gradient(to left, #268eb1, #eeeeed);
+}
+
+/*---------- NAVBAR ----------*/
+nav {
+  background-color: rgb(78, 78, 78);
+  overflow: hidden;
+  width: 100%;
+}
+
+.navigationBar {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.navLink {
+  float: left;
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  background-color: aliceblue;
+  color: rgb(78, 78, 78);
+  text-decoration: none;
+}
+
+/*------------HOME------------*/
+
+.imgSource {
+  position: absolute;
+  bottom: 3px;
+  right: 5px;
+  color: lightcyan;
+  text-shadow: 1px 1px 7px white;
+  font-size: 11px;
+}  
+
+#welcome h1 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 5rem;
+}
+
+#welcome-img-div {
+  position: relative;
+  max-width: fit-content;
+  margin: 3rem auto;
+}
+
+#welcome-cam {
+  height: 300px;
+}
+
+
+.footer {
+  border-top:rgb(154, 200, 243);
+  border-top-style: outset; 
+  padding-top: 2rem;
+}
+
+.footer-company-name{
+  font-weight: 650;
+}
+
+.top-img{
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+/*---------- ABOUT Section --------*/
+.biography {
+  overflow: scroll;
+  max-height: 70vh;
+}
+
+.bio-pic {
+  max-height: 70vh;
+}
+
+#listings {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+
+/*----------Contact Section ---------*/
+#contact-form {
+  text-align: center;
+}
+
+.contact-legend {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+label {
+  display: block;
+}
+
+#contact-form input, #contact-form textarea {
+  width: 70%;
+  min-width: 480px;
+}
+
+/*-----------Gallery----------*/
+.gallery-row {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0 5px;
+}
+
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 5px;
+}
+
+.column img {
+  margin-top: 9px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+/*----------Resource----------*/
+.card{
+  margin-bottom: 2rem;
+}
+#pdf-guide-block {
+  margin: 4rem 0;
+}
+
+.resource-block{
+  padding: 4rem 0;
+  border-top: gray;
+  border-top-style: solid;
+}
+
+#pexels-search{
+  display: inline-block;
+}
+
+#results {
+  margin-bottom: 5rem;
+}

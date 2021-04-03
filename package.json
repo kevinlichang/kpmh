@@ -4,7 +4,9 @@
   "description": "KPMH Investments LLC webpage",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,6 @@
     "nodemailer": "^6.5.0"
   },
   "engines": {
-    "node": "14.16.0"
+    "node": "14.x"
   }
 }

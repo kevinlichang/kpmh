@@ -7,15 +7,15 @@ emailRouter = express.Router();
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-      user: 'expert.finder.c2c@gmail.com',
-      pass: 'coast2coastemail'
+      user: 'kpmhinvestmentsllc@gmail.com',
+      pass: 'kpmhemail7711'
   }
 });
 
 emailRouter.get('/send-email-confirm', function(req, res) {
   const mailOptions = {
-  from: 'expert.finder.c2c@gmail.com',
-  to : req.query.to,
+  from: 'kpmhinvestmentsllc@gmail.com',
+  to : 'kpmhinvestmentsllc@gmail.com',
   subject : req.query.subject,
   text : req.query.text
   }

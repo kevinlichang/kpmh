@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-emailRouter.get('/send-email-confirm', function(req, res) {
+emailRouter.get('/send-message', function(req, res) {
   const mailOptions = {
   from: 'kpmhinvestmentsllc@gmail.com',
   to : 'kpmhinvestmentsllc@gmail.com',

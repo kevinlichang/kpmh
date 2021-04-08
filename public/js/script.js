@@ -4,17 +4,23 @@ $(document).ready(function(){
     // Send button funciton. 
     $("#send-message-btn").click(function(){   
 
+        let fname = $("#fname").val();
+        let lname = $("#lname").val();
+        let message = $("#message").val();
+        let email=$("#email").val();
         // Sending email function
-        var email,subject,text; 
-        email=$("#email").val();
-        subject = "New Message from " + $("#fname").val() + " " + $("#lname").val();
-        text = $("#message").val() + "\n" + "Contact email: " + email;
+        
+        let subject = "New Message from " + fname + " " + lname;
+        let text = message + "\n" + "Contact email: " + email;
+        console.log(email);
+        console.log(subject);
+        console.log(text);
     
-        $.get(url + "/send-message",
+        $.post(url + "/emailer",
         {
             subject:subject,
-            text:text},
-            null)
+            text:text
+        });
     });
 
 });

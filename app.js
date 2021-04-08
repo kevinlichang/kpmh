@@ -2,72 +2,47 @@
 const express = require('express');
 // var session = require('express-session');
 var path = require('path');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
+require('dotenv').config();
+var exphbs = require('express-handlebars');
 const app = express();
 const PORT = process.env.PORT || 4001;
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: true,
-  })
-)
-
+app.use(express.json());
+app.use(express.urlencoded());
 
 // Starting Page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.render('index', {
+    title: 'KPMH Investments'
+  })
 });
 
-// app.get('/index.html', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/index.html'));
-// });
+app.get('/index', (req, res) => {
+  res.render('index', {
+    title: 'KPMH Investments'
+  })
+});
+
 
 // Contact page
-app.get('/contact.html', (req, res) => {
-  res.sendFile(path.join(__dirname + '/contact.html'));
+app.get('/contact', (req, res) => {
+  res.render('contact', {
+    title: 'Contact US - KPMH Investments'
+  })
 });
 
-// // Send Message to email
-// const emailRouter = require('./models/emailRoute.js');
-// app.use(emailRouter);
+// Send Message to email
+app.use('/emailer', require('./routes/emailRoute'));
 
 // 404 Error Page
 // app.use((req, res) =>{
 //   res.sendFile(path.join(__dirname + '/404.html'));
 // })
-const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-      user: 'kpmhinvestmentsllc@gmail.com',
-      pass: 'kpmhemail7711'
-  }
-});
-
-app.get('/send-message', function(req, res) {
-  console.log("sending email...");
-  const mailOptions = {
-  from: 'kpmhinvestmentsllc@gmail.com',
-  to: 'kpmhinvestmentsllc@gmail.com',
-  subject: req.query.subject,
-  text: req.query.text
-  }
-  
-  console.log(mailOptions)
-  
-  transporter.sendMail(mailOptions, function(err, res) {
-    if (err) {
-      console.error('there was an error: ', err);
-    } else {
-      console.log('here is the res: ', res);
-      res.end("sent")
-    }
-  })
-
-});
 
 
 

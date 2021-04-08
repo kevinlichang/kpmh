@@ -1,4 +1,5 @@
-let url = "http://localhost:4001";
+var url = document.URL;
+url = url.slice(0, -8);
 
 $(document).ready(function(){
     // Send button funciton. 

@@ -24,7 +24,6 @@ transporter.verify((error, success) => {
 });
 
 emailRouter.post('/', (req, res, next) => {
-  console.log(req.body);
   const mailOptions = {
   from: process.env.THE_EMAIL,
   to : process.env.THE_EMAIL,

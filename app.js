@@ -36,6 +36,12 @@ app.get('/contact', (req, res) => {
   })
 });
 
+app.get('/resources', (req, res) => {
+  res.render('resources', {
+    title: 'Resources - KPMH Investments'
+  })
+});
+
 // Send Message to email
 app.use('/emailer', require('./routes/emailRoute'));
 

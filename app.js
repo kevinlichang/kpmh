@@ -1,6 +1,5 @@
 //create express instance
 const express = require('express');
-// var session = require('express-session');
 var path = require('path');
 require('dotenv').config();
 var exphbs = require('express-handlebars');
@@ -12,8 +11,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
+const expressSession = require('express-session')({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false
+});
+
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
+app.use(expressSession);
 
 // Starting Page
 app.get('/', (req, res) => {

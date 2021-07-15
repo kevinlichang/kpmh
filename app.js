@@ -6,6 +6,7 @@ require('dotenv').config();
 const passport = require('passport');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+const connectEnsureLogin = 
 
 var exphbs = require('express-handlebars');
 const app = express();
@@ -41,6 +42,11 @@ const UserDetail = new Schema({
 UserDetail.plugin(passportLocalMongoose);
 const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
 
+passport.use(UserDetails.createStrategy());
+
+passport.serializeUser(UserDetails.serializeUser());
+passport.deserializeUser(UserDetails.deserializeUser());
+
 // Starting Page
 app.get('/', (req, res) => {
   res.render('index', {
@@ -71,10 +77,28 @@ app.get('/resources', (req, res) => {
 // Send Message to email
 app.use('/emailer', require('./routes/emailRoute'));
 
-// 404 Error Page
-// app.use((req, res) =>{
-//   res.sendFile(path.join(__dirname + '/404.html'));
-// })
+// login
+app.post('/login', (req, res, next) => {
+  passport.authenticate('local',
+  (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.redirect('/login?info=' + info);
+    }
+
+    req.logIn(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+
+      return res.redirect('/');
+    });
+  
+  })(req, res, next);
+});
 
 
 

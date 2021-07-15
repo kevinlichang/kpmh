@@ -6,7 +6,7 @@ require('dotenv').config();
 const passport = require('passport');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
-const connectEnsureLogin = 
+const connectEnsureLogin = require('connect-ensure-login');
 
 var exphbs = require('express-handlebars');
 const app = express();
@@ -95,11 +95,15 @@ app.post('/login', (req, res, next) => {
       }
 
       return res.redirect('/');
-    });
-  
+    });  
   })(req, res, next);
 });
 
+app.get('/login', (req, res) => {
+  res.render('login', {
+    title: 'Login - KPMH Investments'
+  })
+});
 
 
 //start server

@@ -2,6 +2,11 @@
 const express = require('express');
 var path = require('path');
 require('dotenv').config();
+
+const passport = require('passport');
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
+
 var exphbs = require('express-handlebars');
 const app = express();
 const PORT = process.env.PORT || 4001;
@@ -20,6 +25,21 @@ const expressSession = require('express-session')({
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(expressSession);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+mongoose.connect('mongodb://localhost/firstDatabase', 
+  { useNewUrlParser: true, useUnifiedTopology: true});
+
+const Schema = mongoose.Schema;
+const UserDetail = new Schema({
+  username: String,
+  password: String
+});
+
+UserDetail.plugin(passportLocalMongoose);
+const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
 
 // Starting Page
 app.get('/', (req, res) => {

@@ -24,14 +24,14 @@ const expressSession = require('express-session')({
 });
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(expressSession);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://localhost/firstDatabase', 
-  { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost/firstDatabase',
+  { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Schema = mongoose.Schema;
 const UserDetail = new Schema({
@@ -48,17 +48,21 @@ passport.serializeUser(UserDetails.serializeUser());
 passport.deserializeUser(UserDetails.deserializeUser());
 
 // Starting Page
-app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'KPMH Investments'
-  })
-});
+app.get('/',
+  (req, res) => {
+    res.render('index', {
+      title: 'KPMH Investments'
+    })
+  }
+);
 
-app.get('/index', (req, res) => {
-  res.render('index', {
-    title: 'KPMH Investments'
-  })
-});
+app.get('/index',
+  (req, res) => {
+    res.render('index', {
+      title: 'KPMH Investments'
+    })
+  }
+);
 
 
 // Contact page
@@ -80,23 +84,23 @@ app.use('/emailer', require('./routes/emailRoute'));
 // login
 app.post('/login', (req, res, next) => {
   passport.authenticate('local',
-  (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-
-    if (!user) {
-      return res.redirect('/login?info=' + info);
-    }
-
-    req.logIn(user, function(err) {
+    (err, user, info) => {
       if (err) {
         return next(err);
       }
 
-      return res.redirect('/');
-    });  
-  })(req, res, next);
+      if (!user) {
+        return res.redirect('/login?info=' + info);
+      }
+
+      req.logIn(user, function (err) {
+        if (err) {
+          return next(err);
+        }
+
+        return res.redirect('/');
+      });
+    })(req, res, next);
 });
 
 app.get('/login', (req, res) => {
@@ -105,6 +109,19 @@ app.get('/login', (req, res) => {
   })
 });
 
+app.get('/user',
+  connectEnsureLogin.ensureLoggedIn(),
+  (req, res) => res.send({ user: req.user })
+);
+
+app.get('/profile',
+  connectEnsureLogin.ensureLoggedIn(),
+  (req, res) => {
+    res.render('profile', {
+      title: 'Profile - KPMH Investments'
+    })
+  }
+);
 
 //start server
 app.listen(PORT, () => {

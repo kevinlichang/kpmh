@@ -6,22 +6,25 @@
   <h2 class="m-3">Employee Login</h2>
 
   <div class="login-div">
-    <div class="row m-2">
-      <div class="col-1">
-        <label for="emailLogin" class="col-form-label">E-mail </label>
+    <form action="/login" method="post">
+      <div class="row m-2">
+        <div class="col-1">
+          <label for="emailLogin" class="col-form-label">E-mail </label>
+        </div>
+        <div class="col-5">
+          <input type="email" id="emailLogin" class="form-control">
+        </div>
       </div>
-      <div class="col-5">
-        <input type="email" id="emailLogin" class="form-control">
-      </div>
-    </div>
-    <div class="row m-2">
-      <div class="col-1">
-        <label for="passwordLogin" class="col-form-label">Password</label>
-      </div>
-      <div class="col-5">
-        <input type="password" id="passwordLogin" class="form-control">
-      </div>
-    </div>      
-    <button type="submit" class="btn btn-primary mx-3">Submit</button>    
+      <div class="row m-2">
+        <div class="col-1">
+          <label for="passwordLogin" class="col-form-label">Password</label>
+        </div>
+        <div class="col-5">
+          <input type="password" id="passwordLogin" class="form-control">
+        </div>
+      </div>      
+      <button type="submit" class="btn btn-primary mx-3">Submit</button>    
+      <label id="error-message"></label>
+    </form>  
   </div>
 </div>

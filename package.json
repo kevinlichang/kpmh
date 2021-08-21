@@ -19,11 +19,13 @@
   "homepage": "https://github.com/kevinlichang/kpmh#readme",
   "dependencies": {
     "connect-ensure-login": "^0.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.0",
     "express-session": "^1.17.2",
     "mongoose": "^5.13.2",
+    "multiparty": "^4.2.2",
     "nodemailer": "^6.5.0",
     "passport": "^0.4.1",
     "passport-local-mongoose": "^6.1.0"

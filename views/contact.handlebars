@@ -4,30 +4,30 @@
 
  
 <div class="container">
-  <div>
+  <form id="contact-form" method="POST" action="/send" enctype="multipart/form-data">
     <h2>Contact Us</h2>
       <div class="row mb-3">
       <div class="col">
         <label for="fname" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="fname">
+        <input type="text" class="form-control" id="fname" name="fname" required>
       </div>
       <div class="col">
         <label for="lname" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="lname">
+        <input type="text" class="form-control" id="lname" name="lname" required>
       </div>
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email Address</label>
-      <input type="email" class="form-control" id="email">
+      <input type="email" class="form-control" id="email" name="email" required>
     </div>
     <div class="mb-3">
       <label for="message" class="form-label">Message</label>
-      <textarea class="form-control" id="message" rows="5"></textarea>
+      <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
     </div>
-    <button class="btn btn-primary" id="send-message-btn">
+    <button class="btn btn-primary" id="send-message-btn" type="submit">
       <span id="send-text">Send</span>
       <i class="fas fa-check hidden" id="checkmark"></i>
     </button>
-  </div>
+  </form>
 
 </div>

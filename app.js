@@ -79,7 +79,7 @@ app.get('/resources', (req, res) => {
 });
 
 // Send Message to email
-app.use('/emailer', require('./routes/emailRoute'));
+app.use('/contact/send', require('./routes/emailRoute'));
 
 // login
 app.post('/login', (req, res, next) => {

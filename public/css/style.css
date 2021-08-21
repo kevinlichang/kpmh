@@ -100,3 +100,16 @@ nav {
   opacity: 80%;
   overflow: hidden;
 }
+
+/*------------------Contact------------------*/
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline-block;
+}
+
+#send-message-btn {
+  width: 100px;
+}

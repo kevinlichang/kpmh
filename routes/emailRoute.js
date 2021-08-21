@@ -19,7 +19,7 @@ transporter.verify((error, success) => {
   if(error) {
     console.error(error)
   } else {
-    console.log('users ready to mail myself')
+    console.log('Nodemailer ready')
   }
 });
 

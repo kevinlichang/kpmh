@@ -24,8 +24,13 @@ url = url.slice(0, -8);
 //       }
 //     );
 //     $("#send-text").addClass("hidden");
-//     $("#checkmark").removeClass("hidden").addClass("visible")
-//     $("#send-message-btn").addClass("green");
+//     $("#checkmark").removeClass("hidden").addClass("visible");
+//     $("#send-message-btn").attr("disabled", "disabled");
+//     $("#success-msg").text("Message sent! Returning to home page.")
+//     setTimeout(function () {
+//       window.location.href = url
+//     }, 3800);
+
 
 //   });
   
@@ -37,6 +42,14 @@ const formEvent = form.addEventListener("submit", (event) => {
   event.preventDefault();
   let mail = new FormData(form);
   sendMail(mail);
+
+  $("#send-text").addClass("hidden");
+  $("#checkmark").removeClass("hidden").addClass("visible");
+  $("#send-message-btn").attr("disabled", "disabled");
+  $("#success-msg").text("Message sent! Returning to home page.")
+  setTimeout(function () {
+    window.location.href = url
+  }, 3700);
 });
 
 fetchURL = document.URL + "/send"

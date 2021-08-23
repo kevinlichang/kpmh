@@ -3,7 +3,6 @@ const nodemailer = require("nodemailer");
 const multiparty = require("multiparty");
 
 emailRouter = express.Router();
-console.log("from emailRoute.js")
 
 const transport = {
   host: 'smtp.gmail.com',

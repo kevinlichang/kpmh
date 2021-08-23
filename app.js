@@ -1,38 +1,43 @@
-//create express instance
 const express = require('express');
-var path = require('path');
-require('dotenv').config();
-
-const passport = require('passport');
-const connectEnsureLogin = require('connect-ensure-login');
-const User = require('./user.js'); // User Model
-
-var exphbs = require('express-handlebars');
 const app = express();
-const PORT = process.env.PORT || 4001;
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+
+// const passport = require('passport');
+// const connectEnsureLogin = require('connect-ensure-login');
+
+// require DB connections
+const dbConnect = require('./db/dbConnect.js'); // User Model
+const User = require("./db/userModel");
+dbConnect();
+
+const path = require('path');
+const exphbs = require('express-handlebars');
+
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-const expressSession = require('express-session')({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(expressSession);
 
-app.use(passport.initialize());
-app.use(passport.session());
+// const expressSession = require('express-session')({
+//   secret: process.env.SECRET,
+//   resave: false,
+//   saveUninitialized: false
+// });
+// app.use(expressSession);
 
-passport.use(User.createStrategy());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(User.createStrategy());
+
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 // Starting Page
 app.get('/',
@@ -76,26 +81,65 @@ app.get('/login', (req, res) => {
   })
 });
 
-app.post('/login', (req, res, next) => {
-  passport.authenticate('local',
-    (err, user, info) => {
-      if (err) {
-        return next(err);
-      }
-
-      if (!user) {
-        return res.redirect('/login?info=' + info);
-      }
-
-      req.logIn(user, function (err) {
-        if (err) {
-          return next(err);
-        }
-
-        return res.redirect('/dashboard');
+// ----------------- REGISTER ----------------------------------
+app.post('/register', (req, res) => {
+  bcrypt.hash(req.body.password, 10)
+    .then((hashedPassword) => {
+      // create a new user instance and collect the data
+      const user = new User({
+        username: req.body.username,
+        password: hashedPassword,
       });
-    })(req, res, next);
+
+      // save the new user
+      user.save()
+        // return success if the new user is added to the database successfully
+        .then((result) => {
+          res.status(201).send({
+            message: "User Created Successfully",
+            result,
+          });
+        })
+        // catch error if the new user wasn't added successfully to the database
+        .catch((err) => {
+          res.status(500).send({
+            message: "Error creating user",
+            err,
+          });
+        });
+    })
+    // catch error if the password hash isn't successful
+    .catch((e) => {
+      res.status(500).send({
+        message: "Error trying to hash password",
+        e,
+      });
+    });
 });
+
+
+
+
+// app.post('/login', (req, res, next) => {
+//   passport.authenticate('local',
+//     (err, user, info) => {
+//       if (err) {
+//         return next(err);
+//       }
+
+//       if (!user) {
+//         return res.redirect('/login?info=' + info);
+//       }
+
+//       req.logIn(user, function (err) {
+//         if (err) {
+//           return next(err);
+//         }
+
+//         return res.redirect('/dashboard');
+//       });
+//     })(req, res, next);
+// });
 
 
 // app.get('/user',
@@ -103,26 +147,26 @@ app.post('/login', (req, res, next) => {
 //   (req, res) => res.send({ user: req.user })
 // );
 
-app.get('/profile',
-  connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => {
-    res.render('profile', {
-      title: 'Profile - KPMH Investments'
-    })
-  }
-);
+// app.get('/profile',
+//   connectEnsureLogin.ensureLoggedIn(),
+//   (req, res) => {
+//     res.render('profile', {
+//       title: 'Profile - KPMH Investments'
+//     })
+//   }
+// );
 
-app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-  res.send(`Hello ${req.user.username}. Your session ID is ${req.sessionID} 
-   <br><br>
-   <a href="/logout">Log Out</a><br><br>
-   <a href="/profile">Members Only</a>`);
-});
+// app.get('/dashboard', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
+//   res.send(`Hello ${req.user.username}. Your session ID is ${req.sessionID} 
+//    <br><br>
+//    <a href="/logout">Log Out</a><br><br>
+//    <a href="/profile">Members Only</a>`);
+// });
 
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/login');
-});
+// app.get('/logout', function(req, res) {
+//   req.logout();
+//   res.redirect('/login');
+// });
 
 //start server
 app.listen(PORT, () => {

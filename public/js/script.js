@@ -71,7 +71,7 @@ req.onreadystatechange = function () {
     document.getElementById("welcome-message").innerText = `Welcome ${user.username}!!`;
   }
 };
-req.open("GET", url + "/user", true);
+req.open("GET", "http://localhost:4001/user", true);
 req.send();
 
 //login

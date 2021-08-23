@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/kevinlichang/kpmh#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "connect-ensure-login": "^0.1.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

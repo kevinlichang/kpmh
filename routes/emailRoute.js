@@ -24,27 +24,6 @@ transporter.verify((error, success) => {
 });
 
 emailRouter.post('/', (req, res, next) => {
-  // const mailOptions = {
-  // from: process.env.THE_EMAIL,
-  // to : process.env.THE_EMAIL,
-  // subject : req.body.subject,
-  // text : req.body.text
-  // }
-  
-  // console.log(mailOptions)
-  
-  // transporter.sendMail(mailOptions, function(err, data) {
-  //   if (err) {
-  //     res.json({
-  //       status: 'fail'
-  //     })
-  //   } else {
-  //     res.json({
-  //       status: 'success'
-  //     })q
-  //   }
-  // })
-
   let form = new multiparty.Form();
   let data = {};
   form.parse(req, function (err, fields) {

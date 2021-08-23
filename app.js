@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-
+const jwt = require("jsonwebtoken");
 // const passport = require('passport');
 // const connectEnsureLogin = require('connect-ensure-login');
 
 // require DB connections
 const dbConnect = require('./db/dbConnect.js'); // User Model
 const User = require("./db/userModel");
+const auth = require("./auth");
 dbConnect();
 
 const path = require('path');
@@ -117,8 +118,78 @@ app.post('/register', (req, res) => {
     });
 });
 
+app.post('/login', (req, res) => {
+  // check if username exists
+  User.findOne({ username: req.body.username }).then((user) => {
+    // compare password entered to hashed password
+    bcrypt.compare(req.body.password, user.password)
+      .then((passwordCheck) => {
 
+        // check if password matches
+        if (!passwordCheck) {
+          return res.status(400).send({
+            message: "Passwords do not match",
+            error,
+          });
+        }
 
+        //   create JWT token
+        const token = jwt.sign(
+          {
+            userId: user._id,
+            userUsername: user.username,
+          },
+          "RANDOM-TOKEN",
+          { expiresIn: "24h" }
+        );
+
+        //   return success response
+        res.status(200).send({
+          message: "Login Successful",
+          username: user.username,
+          token
+        });
+      })
+      .catch((error) => {
+        res.status(400).send({
+          message: "Passwords does not match",
+          error,
+        });
+      });
+    
+    
+  })
+    .catch((e) => {
+      res.status(404).send({
+        message: "Username not found",
+        e,
+      });
+    });
+});
+
+// free endpoint
+app.get("/free-endpoint", (req, res) => {
+  res.json({ message: "You are free to access me anytime" });
+});
+
+// authentication endpoint
+app.get("/auth-endpoint", auth, (req, res) => {
+  res.send({ message: "You are authorized to access me" });
+});
+
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
 
 // app.post('/login', (req, res, next) => {
 //   passport.authenticate('local',

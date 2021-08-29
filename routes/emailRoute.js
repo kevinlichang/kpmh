@@ -46,8 +46,7 @@ emailRouter.post('/', (req, res, next) => {
         res.status(200).send("Email successfully sent to recipient!");
       }
     });
-  });
-
+  })
 });
 
 module.exports = emailRouter;

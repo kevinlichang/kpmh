@@ -6,10 +6,10 @@
   <h2 class="m-3">Employee Login</h2>
 
   <div class="login-div">
-    <form action="/login" method="post">
+    <form id="login-form" method="post">
       <div class="row m-2">
         <div class="col-1">
-          <label for="emailLogin" class="col-form-label">E-mail </label>
+          <label for="username" class="col-form-label">Username </label>
         </div>
         <div class="col-5">
           <input type="text" id="username" name="username" class="form-control" required>
@@ -23,8 +23,8 @@
           <input type="password" id="password" name="password" class="form-control">
         </div>
       </div>      
-      <button type="submit" class="btn btn-primary mx-3">Submit</button>    
-      <label id="error-message"></label>
+      <button type="submit" class="btn btn-primary mx-3" id="login-btn">Submit</button>    
+      <label id="response-message"></label>
     </form>  
   </div>
 </div>

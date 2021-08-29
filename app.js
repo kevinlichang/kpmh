@@ -44,7 +44,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/',
   (req, res) => {
     res.render('index', {
-      title: 'KPMH Investments'
+      title: 'KPMH Investments',
+      script: 'script.js'
     })
   }
 );
@@ -52,7 +53,8 @@ app.get('/',
 app.get('/index',
   (req, res) => {
     res.render('index', {
-      title: 'KPMH Investments'
+      title: 'KPMH Investments',
+      script: 'script.js'
     })
   }
 );
@@ -61,13 +63,15 @@ app.get('/index',
 // Contact page
 app.get('/contact', (req, res) => {
   res.render('contact', {
-    title: 'Contact US - KPMH Investments'
+    title: 'Contact US - KPMH Investments',
+    script: 'script.js'
   })
 });
 
 app.get('/resources', (req, res) => {
   res.render('resources', {
-    title: 'Resources - KPMH Investments'
+    title: 'Resources - KPMH Investments',
+    script: 'script.js'
   })
 });
 
@@ -78,7 +82,8 @@ app.use('/contact/send', require('./routes/emailRoute'));
 
 app.get('/login', (req, res) => {
   res.render('login', {
-    title: 'Login - KPMH Investments'
+    title: 'Login - KPMH Investments',
+    script: 'loginScript.js'
   })
 });
 
@@ -118,7 +123,7 @@ app.post('/register', (req, res) => {
     });
 });
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   // check if username exists
   User.findOne({ username: req.body.username }).then((user) => {
     // compare password entered to hashed password
@@ -139,15 +144,15 @@ app.post('/login', (req, res) => {
             userId: user._id,
             userUsername: user.username,
           },
-          "RANDOM-TOKEN",
-          { expiresIn: "24h" }
+          process.env.PRIVATE_KEY,
+          { expiresIn: 60*30 }
         );
 
         //   return success response
-        res.status(200).send({
+        res.status(200).json({
           message: "Login Successful",
           username: user.username,
-          token
+          token,
         });
       })
       .catch((error) => {
@@ -168,12 +173,12 @@ app.post('/login', (req, res) => {
 });
 
 // free endpoint
-app.get("/free-endpoint", (req, res) => {
+app.get("/free", (req, res) => {
   res.json({ message: "You are free to access me anytime" });
 });
 
 // authentication endpoint
-app.get("/auth-endpoint", auth, (req, res) => {
+app.get("/auth", auth, (req, res) => {
   res.send({ message: "You are authorized to access me" });
 });
 

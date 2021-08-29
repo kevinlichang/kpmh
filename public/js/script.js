@@ -1,47 +1,14 @@
 var url = document.URL;
 url = url.slice(0, -8);
 
-// $(document).ready(function () {
-//   // Send button funciton. 
-//   $("#send-message-btn").click(function () {
+// ------------ Contact Page Form ------------------
 
-//     let fname = $("#fname").val();
-//     let lname = $("#lname").val();
-//     let message = $("#message").val();
-//     let email = $("#email").val();
-//     // Sending email function
-
-//     let subject = "New Message from " + fname + " " + lname;
-//     let text = message + "\n" + "Contact email: " + email;
-//     console.log(email);
-//     console.log(subject);
-//     console.log(text);
-
-//     $.post(url + "/emailer",
-//       {
-//         subject: subject,
-//         text: text
-//       }
-//     );
-//     $("#send-text").addClass("hidden");
-//     $("#checkmark").removeClass("hidden").addClass("visible");
-//     $("#send-message-btn").attr("disabled", "disabled");
-//     $("#success-msg").text("Message sent! Returning to home page.")
-//     setTimeout(function () {
-//       window.location.href = url
-//     }, 3800);
-
-
-//   });
-  
-// });
-
-const form = document.getElementById("contact-form");
-
-const formEvent = form.addEventListener("submit", (event) => {
+const contactForm = document.getElementById("contact-form");
+fetchURL = document.URL + "/send"
+const formEvent = contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  let mail = new FormData(form);
-  sendMail(mail);
+  let mail = new FormData(contactForm);
+  sendMail(mail, fetchURL);
 
   $("#send-text").addClass("hidden");
   $("#checkmark").removeClass("hidden").addClass("visible");
@@ -49,20 +16,17 @@ const formEvent = form.addEventListener("submit", (event) => {
   $("#success-msg").text("Message sent! Returning to home page.")
   setTimeout(function () {
     window.location.href = url
-  }, 3700);
+  }, 3200);
 });
 
-fetchURL = document.URL + "/send"
-
-const sendMail = (mail) => {
-  fetch(fetchURL, {
+const sendMail = (mail, url) => {
+  fetch(url, {
     method: "post",
     body: mail,
   }).then((response) => {
-    return response.json();
+    return response;
   });
 };
-
 
 
 // index

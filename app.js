@@ -1,5 +1,6 @@
 //create express instance
 const express = require('express');
+const app = express();
 var path = require('path');
 require('dotenv').config();
 
@@ -9,7 +10,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const connectEnsureLogin = require('connect-ensure-login');
 
 var exphbs = require('express-handlebars');
-const app = express();
+
 const PORT = process.env.PORT || 4001;
 
 app.use(express.static(__dirname + '/public'));
@@ -51,7 +52,8 @@ passport.deserializeUser(UserDetails.deserializeUser());
 app.get('/',
   (req, res) => {
     res.render('index', {
-      title: 'KPMH Investments'
+      title: 'KPMH Investments',
+      script: 'script.js'
     })
   }
 );
@@ -59,7 +61,8 @@ app.get('/',
 app.get('/index',
   (req, res) => {
     res.render('index', {
-      title: 'KPMH Investments'
+      title: 'KPMH Investments',
+      script: 'script.js'
     })
   }
 );
@@ -68,13 +71,15 @@ app.get('/index',
 // Contact page
 app.get('/contact', (req, res) => {
   res.render('contact', {
-    title: 'Contact US - KPMH Investments'
+    title: 'Contact US - KPMH Investments',
+    script: 'script.js'
   })
 });
 
 app.get('/resources', (req, res) => {
   res.render('resources', {
-    title: 'Resources - KPMH Investments'
+    title: 'Resources - KPMH Investments',
+    script: 'script.js'
   })
 });
 
@@ -105,7 +110,8 @@ app.post('/login', (req, res, next) => {
 
 app.get('/login', (req, res) => {
   res.render('login', {
-    title: 'Login - KPMH Investments'
+    title: 'Login - KPMH Investments',
+    script: 'script.js'
   })
 });
 
@@ -118,7 +124,8 @@ app.get('/profile',
   connectEnsureLogin.ensureLoggedIn(),
   (req, res) => {
     res.render('profile', {
-      title: 'Profile - KPMH Investments'
+      title: 'Profile - KPMH Investments',
+      script: 'script.js'
     })
   }
 );

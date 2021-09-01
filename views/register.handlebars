@@ -1,0 +1,39 @@
+<div class="top-img">
+  <img src="imgs/nyc01.jpg" class="w-100">
+</div>
+
+
+<div class="container">
+  <h2 class="m-3">Register Employee</h2>
+
+  <div class="register-div">
+    <form action="/register" method="post">
+      <div class="row m-2">
+        <div class="col-1">
+          <label for="usernameRegister" class="col-form-label">Username</label>
+        </div>
+        <div class="col-5">
+          <input type="text" id="usernameRegister" name="usernameRegister" class="form-control">
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-1">
+          <label for="emailRegister" class="col-form-label">Username</label>
+        </div>
+        <div class="col-5">
+          <input type="email" id="emailRegister" name="emailRegister" class="form-control">
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-1">
+          <label for="passwordRegister" class="col-form-label">Password</label>
+        </div>
+        <div class="col-5">
+          <input type="password" id="passwordRegister" name="passwordRegister" class="form-control">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mx-3">Submit</button>
+      <label id="register-result"></label>
+    </form>
+  </div>
+</div>

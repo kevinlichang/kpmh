@@ -87,26 +87,26 @@ app.get('/resources', (req, res) => {
 app.use('/contact/send', require('./routes/emailRoute'));
 
 // login
-app.post('/login', (req, res, next) => {
-  passport.authenticate('local',
-    (err, user, info) => {
-      if (err) {
-        return next(err);
-      }
+// app.post('/login', (req, res, next) => {
+//   passport.authenticate('local',
+//     (err, user, info) => {
+//       if (err) {
+//         return next(err);
+//       }
 
-      if (!user) {
-        return res.redirect('/login?info=' + info);
-      }
+//       if (!user) {
+//         return res.redirect('/login?info=' + info);
+//       }
 
-      req.logIn(user, function (err) {
-        if (err) {
-          return next(err);
-        }
+//       req.logIn(user, function (err) {
+//         if (err) {
+//           return next(err);
+//         }
 
-        return res.redirect('/');
-      });
-    })(req, res, next);
-});
+//         return res.redirect('/');
+//       });
+//     })(req, res, next);
+// });
 
 app.get('/login', (req, res) => {
   res.render('login', {
@@ -129,6 +129,11 @@ app.get('/profile',
     })
   }
 );
+
+// ---------------------REGISTER----------------------------
+app.post('/register', (req, res) => {
+  
+});
 
 //start server
 app.listen(PORT, () => {

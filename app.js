@@ -1,70 +1,88 @@
 //create express instance
 const express = require('express');
 const app = express();
-var path = require('path');
+const bcrypt = require('bcrypt');
+const path = require('path');
 require('dotenv').config();
 
 const passport = require('passport');
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-const connectEnsureLogin = require('connect-ensure-login');
+const flash = require('express-flash');
+const session = require('express-session');
 
-var exphbs = require('express-handlebars');
+const initializePassport = require('./passport-config');
+initializePassport(passport)
 
-const PORT = process.env.PORT || 4001;
+// const passportLocalMongoose = require('passport-local-mongoose');
+// const connectEnsureLogin = require('connect-ensure-login');
+const PORT = process.env.PORT || 3000;
+
+const exphbs = require('express-handlebars');
+
+
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-const expressSession = require('express-session')({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false
-});
+// const expressSession = require('express-session')({
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false
+// });
+// 
+// app.use(expressSession);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(expressSession);
+app.use(flash());
 
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://localhost/firstDatabase',
-  { useNewUrlParser: true, useUnifiedTopology: true });
+const dbConnect = require('./db/dbConnect.js');
+const User = require("./db/userModel");
+dbConnect();
 
-const Schema = mongoose.Schema;
-const UserDetail = new Schema({
-  username: String,
-  password: String
-});
+// mongoose.connect('mongodb://localhost/firstDatabase',
+//   { useNewUrlParser: true, useUnifiedTopology: true });
 
-UserDetail.plugin(passportLocalMongoose);
-const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
+// const Schema = mongoose.Schema;
+// const UserDetail = new Schema({
+//   username: String,
+//   password: String
+// });
 
-passport.use(UserDetails.createStrategy());
+// UserDetail.plugin(passportLocalMongoose);
+// const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
 
-passport.serializeUser(UserDetails.serializeUser());
-passport.deserializeUser(UserDetails.deserializeUser());
+// passport.use(UserDetails.createStrategy());
+
+// passport.serializeUser(UserDetails.serializeUser());
+// passport.deserializeUser(UserDetails.deserializeUser());
 
 // Starting Page
 app.get('/',
   (req, res) => {
     res.render('index', {
       title: 'KPMH Investments',
-      script: 'script.js'
+      script: 'script.js',
     })
   }
 );
 
 app.get('/index',
-  (req, res) => {
-    res.render('index', {
-      title: 'KPMH Investments',
-      script: 'script.js'
-    })
-  }
+(req, res) => {
+  res.render('index', {
+    title: 'KPMH Investments',
+    script: 'script.js',
+  })
+}
 );
 
 
@@ -72,7 +90,7 @@ app.get('/index',
 app.get('/contact', (req, res) => {
   res.render('contact', {
     title: 'Contact US - KPMH Investments',
-    script: 'script.js'
+    script: 'contactUsScript.js'
   })
 });
 
@@ -115,25 +133,64 @@ app.get('/login', (req, res) => {
   })
 });
 
-app.get('/user',
-  connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.send({ user: req.user })
-);
+// app.get('/user',
+//   connectEnsureLogin.ensureLoggedIn(),
+//   (req, res) => res.send({ user: req.user })
+// );
 
-app.get('/profile',
-  connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => {
-    res.render('profile', {
-      title: 'Profile - KPMH Investments',
-      script: 'script.js'
-    })
-  }
-);
+// app.get('/profile',
+//   connectEnsureLogin.ensureLoggedIn(),
+//   (req, res) => {
+//     res.render('profile', {
+//       title: 'Profile - KPMH Investments',
+//       script: 'script.js'
+//     })
+//   }
+// );
+
+// --------------------LOGIN--------------------------------
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+  })
+)
 
 // ---------------------REGISTER----------------------------
-app.post('/register', (req, res) => {
-  
+app.get('/register', (req, res) => {
+  res.render('register', {
+    title: 'Register - KPMH Investments',
+    script: 'script.js'
+  })
 });
+
+app.post('/register', async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    // create a new user instance and collect the data
+    const user = new User({
+      username: req.body.username,
+      password: hashedPassword,
+      fname: req.body.fname,
+      lname: req.body.lname
+    });
+
+    // save the new user
+    user.save()
+    res.redirect('/login')
+  } catch {
+    res.redirect('/register')
+  }
+});
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+
+  res.redirect('/login')
+}
 
 //start server
 app.listen(PORT, () => {

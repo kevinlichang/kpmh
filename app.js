@@ -116,7 +116,7 @@ app.get('/profile',
     res.render('profile', {
       title: 'Profile - KPMH Investments',
       script: 'script.js',
-      loginTab: req.user ? req.user.username : "Login"
+      loginTab: req.user ? req.user.username : "Login",
       fname: req.user.fname,
       lname: req.user.lname
     })

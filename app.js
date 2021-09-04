@@ -74,6 +74,7 @@ app.get('/',
     res.render('index', {
       title: 'KPMH Investments',
       script: 'script.js',
+      loginTab: req.user ? req.user.username : "Login"
     })
   }
 );
@@ -83,7 +84,7 @@ app.get('/index',
     res.render('index', {
       title: 'KPMH Investments',
       script: 'script.js',
-      username: req.user ? req.user.username : ""
+      loginTab: req.user ? req.user.username : "Login"
     })
   }
 );
@@ -93,47 +94,21 @@ app.get('/index',
 app.get('/contact', (req, res) => {
   res.render('contact', {
     title: 'Contact US - KPMH Investments',
-    script: 'contactUsScript.js'
+    script: 'contactUsScript.js',
+    loginTab: req.user ? req.user.username : "Login"
   })
 });
 
 app.get('/resources', (req, res) => {
   res.render('resources', {
     title: 'Resources - KPMH Investments',
-    script: 'script.js'
+    script: 'script.js',
+    loginTab: req.user ? req.user.username : "Login"
   })
 });
 
 // Send Message to email
 app.use('/contact/send', require('./routes/emailRoute'));
-
-// login
-// app.post('/login', (req, res, next) => {
-//   passport.authenticate('local',
-//     (err, user, info) => {
-//       if (err) {
-//         return next(err);
-//       }
-
-//       if (!user) {
-//         return res.redirect('/login?info=' + info);
-//       }
-
-//       req.logIn(user, function (err) {
-//         if (err) {
-//           return next(err);
-//         }
-
-//         return res.redirect('/');
-//       });
-//     })(req, res, next);
-// });
-
-
-// app.get('/user',
-//   connectEnsureLogin.ensureLoggedIn(),
-//   (req, res) => res.send({ user: req.user })
-// );
 
 app.get('/profile',
   checkAuthenticated,
@@ -141,7 +116,7 @@ app.get('/profile',
     res.render('profile', {
       title: 'Profile - KPMH Investments',
       script: 'script.js',
-      username: req.user.username,
+      loginTab: req.user ? req.user.username : "Login"
       fname: req.user.fname,
       lname: req.user.lname
     })
@@ -153,7 +128,8 @@ app.get('/login', checkNotAuthenticated,
   (req, res) => {
     res.render('login', {
       title: 'Login - KPMH Investments',
-      script: 'script.js'
+      script: 'script.js',
+      loginTab: req.user ? req.user.username : "Login"
     })
   }
 );
@@ -171,7 +147,8 @@ app.post('/login', checkNotAuthenticated,
 app.get('/register', checkAuthenticated, (req, res) => {
   res.render('register', {
     title: 'Register - KPMH Investments',
-    script: 'script.js'
+    script: 'script.js',
+    loginTab: req.user ? req.user.username : "Login"
   })
 });
 

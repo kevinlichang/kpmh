@@ -13,11 +13,12 @@
 <body>
   <nav>
     <div class="navigationBar">
-      <a class="navLink" href="index">Home</a>
-      <a class="navLink" href="contact">Contact</a>
-      <a class="navLink" href="resources">Resources</a>
+      <a class="navLink py-3" href="index">Home</a>
+      <a class="navLink py-3" href="contact">Contact</a>
+      <a class="navLink py-3" href="resources">Resources</a>
       <div class="d-flex justify-content-end">
-        <a class="navLink" href="login">Login</a>
+        {{username}}
+        <a class="navLink py-3" href="login">Login</a>
       </div>
       
     </div>
@@ -36,6 +37,6 @@
     </div>    
   </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="js/script.js"></script>
+<script src="js/{{{script}}}"></script>
 </body>
 </html>

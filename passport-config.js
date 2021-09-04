@@ -3,27 +3,34 @@ const bcrypt = require('bcrypt');
 const User = require("./db/userModel");
 
  function initialize(passport) {
-  const authenticateUser = async (username, password, done) => {
-    const currentUser = User.findOne({ username: username })
-    if (!currentUser) {
-      return done(null, false, { message: 'No user with that email' })
-    }
+  const authenticateUser = (username, password, done) => {
+    User.findOne({ username: username })
+      .then(user => {
+        if (!user) {
+          return done(null, false, { message: 'No user with that email' })
+        } else {
+          bcrypt.compare(password, user.password, (err, isMatch) => {
+            if (err) throw err;
 
-    try {
-      if (await bcrypt.compare(password, currentUser.password)) {
-        return done(null, currentUser)
-      } else {
-        return done(null, false, { message: 'Password incorrect'})
-      }
-    } catch (e) {
-      return done(e)
-    }
+            if (isMatch) {
+              return done(null, user);
+            } else {
+              return done(null, false, { message: 'Password incorrect' });
+            }
+          });
+        }
+      })
+      .catch(err => {
+        return done(null, false, { message: err });
+      });
   }
 
   passport.use(new LocalStrategy({ usernameField: 'username' }, authenticateUser));
   passport.serializeUser((user, done) => done(null, user._id));
   passport.deserializeUser((id, done) => {
-    return done(null, User.findById(id));
+    User.findById(id, (err, user) => {
+      done(err, user);
+    })
   });
 }
 

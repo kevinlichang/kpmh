@@ -8,6 +8,7 @@ require('dotenv').config();
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 const initializePassport = require('./passport-config');
 initializePassport(passport)
@@ -44,6 +45,7 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 const dbConnect = require('./db/dbConnect.js');
 const User = require("./db/userModel");
@@ -77,12 +79,13 @@ app.get('/',
 );
 
 app.get('/index',
-(req, res) => {
-  res.render('index', {
-    title: 'KPMH Investments',
-    script: 'script.js',
-  })
-}
+  (req, res) => {
+    res.render('index', {
+      title: 'KPMH Investments',
+      script: 'script.js',
+      username: req.user ? req.user.username : ""
+    })
+  }
 );
 
 
@@ -126,36 +129,43 @@ app.use('/contact/send', require('./routes/emailRoute'));
 //     })(req, res, next);
 // });
 
-app.get('/login', (req, res) => {
-  res.render('login', {
-    title: 'Login - KPMH Investments',
-    script: 'script.js'
-  })
-});
 
 // app.get('/user',
 //   connectEnsureLogin.ensureLoggedIn(),
 //   (req, res) => res.send({ user: req.user })
 // );
 
-// app.get('/profile',
-//   connectEnsureLogin.ensureLoggedIn(),
-//   (req, res) => {
-//     res.render('profile', {
-//       title: 'Profile - KPMH Investments',
-//       script: 'script.js'
-//     })
-//   }
-// );
+app.get('/profile',
+  checkAuthenticated,
+  (req, res) => {
+    res.render('profile', {
+      title: 'Profile - KPMH Investments',
+      script: 'script.js',
+      username: req.user.username,
+      fname: req.user.fname,
+      lname: req.user.lname
+    })
+  }
+);
 
 // --------------------LOGIN--------------------------------
-app.post('/login',
+app.get('/login', checkNotAuthenticated,
+  (req, res) => {
+    res.render('login', {
+      title: 'Login - KPMH Investments',
+      script: 'script.js'
+    })
+  }
+);
+
+app.post('/login', checkNotAuthenticated,
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true
   })
-)
+);
+
 
 // ---------------------REGISTER----------------------------
 app.get('/register', (req, res) => {
@@ -184,6 +194,11 @@ app.post('/register', async (req, res) => {
   }
 });
 
+app.delete('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/login')
+})
+
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
@@ -191,6 +206,14 @@ function checkAuthenticated(req, res, next) {
 
   res.redirect('/login')
 }
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/profile');
+  }
+  next();
+}
+
 
 //start server
 app.listen(PORT, () => {

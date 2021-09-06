@@ -78,10 +78,11 @@ nav {
   margin: 3rem auto;
 }
 
-#welcome-cam {
-  height: 300px;
+.top-img{
+  max-height: 250px;
+  opacity: 80%;
+  overflow: hidden;
 }
-
 
 .footer {
   border-top:rgb(154, 200, 243);
@@ -94,11 +95,6 @@ nav {
   font-weight: 650;
 }
 
-.top-img{
-  max-height: 250px;
-  opacity: 80%;
-  overflow: hidden;
-}
 
 /*------------------Contact------------------*/
 .hidden {

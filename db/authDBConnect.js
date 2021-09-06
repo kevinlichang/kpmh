@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-async function dbConnect() {
+async function authDBConnect() {
   mongoose.connect(process.env.DB_URL,
     {
       useNewUrlParser: true,
@@ -9,14 +9,14 @@ async function dbConnect() {
       useCreateIndex: true,
     }
   ).then(() => {
-    console.log("Successfully connected to MongoDB");
+    console.log("Successfully connected to authDB on MongoDB Atlas");
   }).catch((error) => {
-    console.log("Unable to connect to database");
+    console.log("Unable to connect to authDB");
     console.error(error);
   });
 }
 
-module.exports = dbConnect;
+module.exports = authDBConnect;
 
 
 // const passportLocalMongoose = require('passport-local-mongoose');

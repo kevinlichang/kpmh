@@ -13,12 +13,9 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 initializePassport(passport)
 
-// const passportLocalMongoose = require('passport-local-mongoose');
-// const connectEnsureLogin = require('connect-ensure-login');
 const PORT = process.env.PORT || 3000;
 
 const exphbs = require('express-handlebars');
-
 
 
 app.use(express.static(__dirname + '/public'));
@@ -26,13 +23,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// const expressSession = require('express-session')({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false
-// });
-// 
-// app.use(expressSession);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,26 +37,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
-const dbConnect = require('./db/dbConnect.js');
+
+// CONNECT TO AUTH DB
+const authDBConnect = require('./db/authDBConnect.js');
 const User = require("./db/userModel");
-dbConnect();
+authDBConnect();
 
-// mongoose.connect('mongodb://localhost/firstDatabase',
-//   { useNewUrlParser: true, useUnifiedTopology: true });
-
-// const Schema = mongoose.Schema;
-// const UserDetail = new Schema({
-//   username: String,
-//   password: String
-// });
-
-// UserDetail.plugin(passportLocalMongoose);
-// const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
-
-// passport.use(UserDetails.createStrategy());
-
-// passport.serializeUser(UserDetails.serializeUser());
-// passport.deserializeUser(UserDetails.deserializeUser());
 
 // Starting Page
 app.get('/',

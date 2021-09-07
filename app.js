@@ -39,9 +39,10 @@ app.use(methodOverride('_method'));
 
 
 // CONNECT TO AUTH DB
-const authDBConnect = require('./db/authDBConnect.js');
+const DBConnect = require('./db/DBConnect.js');
 const User = require("./db/userModel");
-authDBConnect();
+const Property = require("./db/propertyModel")
+DBConnect();
 
 
 // Starting Page

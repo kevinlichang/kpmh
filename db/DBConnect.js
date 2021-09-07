@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-async function authDBConnect() {
+async function DBConnect() {
   mongoose.connect(process.env.DB_URL,
     {
       useNewUrlParser: true,
@@ -16,7 +16,7 @@ async function authDBConnect() {
   });
 }
 
-module.exports = authDBConnect;
+module.exports = DBConnect;
 
 
 // const passportLocalMongoose = require('passport-local-mongoose');

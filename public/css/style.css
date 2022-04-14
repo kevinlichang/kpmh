@@ -97,7 +97,7 @@ nav {
 }
 
 .top-img{
-  max-height: 250px;
+  max-height: 20vw;
   opacity: 80%;
   overflow: hidden;
 }

@@ -144,7 +144,7 @@ app.post('/login', checkNotAuthenticated,
 
 
 // ---------------------REGISTER----------------------------
-app.get('/register', checkAuthenticated, (req, res) => {
+app.get('/register', (req, res) => {
   res.render('register', {
     title: 'Register - KPMH Investments',
     script: 'script.js',
@@ -152,7 +152,7 @@ app.get('/register', checkAuthenticated, (req, res) => {
   })
 });
 
-app.post('/register', checkAuthenticated, async (req, res) => {
+app.post('/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     // create a new user instance and collect the data
